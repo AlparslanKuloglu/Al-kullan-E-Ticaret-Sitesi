@@ -1,0 +1,44 @@
+
+const mongoose = require('mongoose');
+const { required } = require('nodemon/lib/config');
+const Schema = mongoose.Schema
+const slugify = require('slugify');
+
+const ProductSchema = new Schema({
+    name: {
+        type: String
+
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    stok: {
+        type: String,
+        required: false
+    },
+    image: {
+        type: String
+    },
+    slug: {
+        type: String,
+
+    },    
+    userID: {
+        type: String,
+        required: false
+    },
+}
+)
+
+ProductSchema.pre('validate', function (next) {
+    this.slug = slugify(this.name, {
+        lower: true,
+        strict: true
+    })
+    next()
+
+})
+
+const Product = mongoose.model('Product', ProductSchema)
+module.exports = Product

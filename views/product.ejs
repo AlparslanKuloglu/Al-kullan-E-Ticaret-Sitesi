@@ -50,12 +50,11 @@
 	</div>
 	<!-- END LOADER -->	
 
-    <!-- Start header -->
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="index">
-					<img src="/images/logo.png" alt="" />
+				<a class="navbar-brand" href="/">
+					<img src="images/Adsız.png" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="icon-bar"></span>
@@ -64,21 +63,49 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item <½= page_name === 'index' && 'active' %> "><a class="nav-link" href="/">Home</a></li>
-						<li class="nav-item <½= page_name === 'about' && 'active' %> "><a class="nav-link" href="/about">About Us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-						<li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-						<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+						<li class="nav-item <½= page_name === 'index' && 'active' %> "><a class="nav-link" href="/products">Ürünler</a></li>
+                    
+					
+
+					 <% if(userROLE==="Customer") {  %>
+							
+						<li class="nav-item"><a class="nav-link" href="/myBasket">Sepetim</a></li>
+						<% }%>
+
+
+					<% if(userROLE==="Seller") {  %>
+					
+						<li class="nav-item"><a class="nav-link" href="/myProducts">Satıştaki Ürünlerim</a></li>
+					
+					<% }%>
 					</ul>
+
+                
+
+
+					<% if(!userIN) {  %>
+
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log orange mr-2" href="login.html"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span></a></li>
-						<li><a class="hover-btn-new log orange" href="register.html"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span></a></li>
-                    </ul>
+                        <li><a class="hover-btn-new log orange mr-2" href="/login"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span></a></li>
+						<li><a class="hover-btn-new log orange" href="/register"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span></a></li>
+                    </ul> 
+					<%  }  %>
+                   
+
+                
+                      <% if(userIN) {  %>
+                        <ul class="nav navbar-nav navbar-right">
+                                <li><a class="hover-btn-new log mr-2" href="/users/logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
+                        </ul>
+						<% } %>
+                            
+                     
+
+
 				</div>
 			</div>
 		</nav>
 	</header>
-	<!-- End header -->
 	
 	
 	
@@ -92,12 +119,13 @@
 						</div>
 						<div class="post-content">
 							<div class="post-date">
-								<span class="day">30</span>
-								<span class="month">Nov</span>
+								<form method="POST" action="/products/addToBasket">
+									<input type="hidden" name="product_id" value="<%= product._id %>">
+									<button class="btn btn-lg btn-warning text-white"><span>SEPETE EKLE</span></button>
+								</form>
+							
 							</div>
-							<div class="meta-info-blog">
-								<span><i class="fa fa-calendar"></i> <a href="#">May 11, 2015</a> </span>
-							</div>
+						
 							<div class="blog-title">
 								<h2><a href="#" title=""><%= product.name %></a></h2>
 							</div>
@@ -114,34 +142,18 @@
 					
 					<div class="blog-author">
 						<div class="author-bio">
-							<h3 class="author_name"><a href="#"><%= user %></a></h3>
-							<h5>CEO at <a href="#">SmartEDU</a></h5>
+			
+							<h3 class="author_name"><a href="#">Satıcı:</a></h3>
+							
 							<p class="author_det">
-								<%= user %>
+								<%=product.user.name %>
 							</p>
 						</div>
-						<div class="author-desc">
-							<img src="images/author.jpg" alt="about author">
-							<ul class="author-social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-skype"></i></a></li>
-							</ul>
-						</div>
+					
 					</div>
 					
                 </div><!-- end col -->
-				<div class="col-lg-3 col-12 right-single">
-					<div class="widget-search">
-						<div class="site-search-area">
-							<form method="get" id="site-searchform" action="#">
-								<div>
-									<input class="input-text form-control" name="search-k" id="search-k" placeholder="Search keywords..." type="text">
-									<input id="searchsubmit" value="Search" type="submit">
-								</div>
-							</form>
-						</div>
-					</div>
+			
 					<div class="widget-categories">
 						<h3 class="widget-title">Categories</h3>
 						<ul>
@@ -222,6 +234,7 @@
             </div>
         </div><!-- end container -->
     </div><!-- end copyrights -->
+
 
     <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 

@@ -26,7 +26,9 @@ exports.createProduct = async (req, res) => {
   
     uploadeImage.mv(uploadPath, async () => {
       await Product.create({
-        ...req.body,
+        name: req.body.name,
+        description: req.body.name,
+        user: req.session.userID,
         image: '/uploads/' + uploadeImage.name,
       });
       res.redirect('/myProducts');
@@ -54,11 +56,10 @@ exports.getAllProducts = async (req, res) => {
 exports.getProduct = async (req, res) => {
 console.log("ahflşdskşlsfdkfsd")
     try {
-    const product = await Product.findOne({slug: req.params.slug})
-    const user= await User.findOne({_id:req.params.userID})
+    const product = await Product.findOne({slug: req.params.slug}).populate('user')
 
         res.status(200).render('product',{
-            product,user
+            product
         })
         
 
@@ -71,3 +72,28 @@ console.log("ahflşdskşlsfdkfsd")
 
 } 
 
+
+
+exports.addToBasket = async (req, res) => {
+   
+    try {
+  
+        console.log("sepet")
+        const user = await User.findById(req.session.userID);
+        console.log("user alındı")
+      await user.basket.push({_id:req.body.product_id});
+      console.log("push")
+      await user.save();
+  
+      res.status(200).redirect('/');
+    } 
+    
+    
+    
+    catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        error,
+      });
+    }
+  };

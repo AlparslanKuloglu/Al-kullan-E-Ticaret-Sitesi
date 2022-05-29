@@ -18,6 +18,10 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
+    basket:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Product'
+      }],
     role:{
         type: String,
         enum:["Customer", "Seller", "Admin"],

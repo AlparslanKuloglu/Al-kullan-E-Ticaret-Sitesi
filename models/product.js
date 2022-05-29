@@ -24,10 +24,10 @@ const ProductSchema = new Schema({
         type: String,
 
     },    
-    userID: {
-        type: String,
-        required: false
-    },
+    user: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+      }
 }
 )
 

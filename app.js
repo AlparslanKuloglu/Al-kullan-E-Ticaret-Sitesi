@@ -23,15 +23,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-/*const MiddleWare1 = (req, res, next) => {
-  console.log("MiddleWare 1");
-  next()
-} */
 
-//next() metodunu eklemeseydik response dönüp duruyordu.
-
-//Template Engines
-//wiews diye bir klasör vardı o dosyanın içindeki .html uzantılı dosyaları .ejsye çevirdi hoca.
 app.set("view engine", "ejs")
 
 //Middlewares
@@ -42,13 +34,7 @@ app.use(express.json())
 app.use(fileUpload())
 
 
-// DOSYA GÖNDERMEK         app.get('/', (req,res) => {
-// path'ı require ettik    res.sendFile(path.resolve(__dirname, 'temp/index.html )) }   index.html'i   /'a gönder demiş olduk.
 
-
-
-// ROUTES
-//app.post('/photos', photoController.createPhoto )
 app.use('*',(req, res, next)=> {
   userIN=req.session.userID,
   userROLE=req.session.userROLE

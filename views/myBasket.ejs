@@ -19,15 +19,15 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <!-- ALL VERSION CSS -->
-    <link rel="stylesheet" href="css/versions.css">
+    <link rel="stylesheet" href="/css/versions.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="/css/custom.css">
 
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
@@ -114,19 +114,19 @@
                 <div class="row"> 
                   <div class="row mt-5"> 
        
-                    <% for (let i =0 ; i < products.length; i++ ) { %>
+                    <% for (let i =0 ; i < user.basket.length; i++ ) { %>
                             
                                     <div class="col-lg-6 col-md-6 col-12">
                                 <div class="course-item mb-5">
                         <div class="image-blog">
-                          <img src="<%= products[i].image %>" alt="" class="img-fluid">
+                          <img src="<%=user.basket[i].image %>" alt="" class="img-fluid">
                         </div>
                         <div class="course-br">
                           <div class="course-title">
-                            <h2><a href="/products/<%= products[i].slug %>" title="">	<%=products[i].name  %></a></h2>
+                            <h2><a href="/products/<%= user.basket[i].slug %>" title=""><%=user.basket[i].name %></a></h2>
                           </div>
                           <div class="blog-desc">
-                            <p><%= products[i].description %></p>
+                            <p></p>
                           </div>
                         </div>
                       </div>
@@ -157,9 +157,7 @@
       <div class="widget-categories">
         <h3 class="widget-title">Kategoriler</h3>
         <ul>
-          <% for (let i =0 ; i < categories.length; i++ ) { %>
-          <li><a href=""><%=categories[i].name %>  </a></li>
-                <% } %>     
+           
         </ul>
       </div>
     </div>

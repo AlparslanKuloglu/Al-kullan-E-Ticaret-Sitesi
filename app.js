@@ -3,12 +3,12 @@ const session = require('express-session');
 const app = express()
 const ejs = require('ejs')
 const mongoose = require('mongoose');
-const Photo = require('./models/Photo')
+const categoryRoute=require('./routes/categoryRoute')
 const fileUpload = require('express-fileupload')
 const fs = require('fs')
 const path=require('path')
-const photoController = require('./controllers/photoControllers');
-const photo = require('./models/Photo');
+
+
 const productRoute = require('./routes/productRoute')
 const pageRoute= require('./routes/pageRoute')
 const userRoute= require('./routes/userRoute')
@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://alparslank:12101210@cluster0.wfcgv.mongodb.net/t
 });
 app.use(
   session({
-    secret: 'my_keyboard_cat', // Buradaki texti değiştireceğiz.
+    secret: 'my_keyboard_cat',
     resave: false,
     saveUninitialized: true,
   })
@@ -43,6 +43,7 @@ app.use('*',(req, res, next)=> {
 app.use('/',pageRoute )
 app.use('/products',productRoute)
 app.use('/users',userRoute)
+app.use('/categories',categoryRoute)
 
 
 

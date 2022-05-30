@@ -220,11 +220,16 @@
 					<div class="tab-pane active" id="Login">
                         <form method="post" action="/products" encType="multipart/form-data" >
 
-                            name: <input type="text" name="name">
-                            description: <input type="text" name="description">
-                            stok: <input type="text" name="stok">
-                          
-                           image: <input type="file" name="image">
+                            Ürün Adı: <input type="text" class="form-control" name="name">
+                            Ürün Özellikleri: <input type="text" class="form-control" name="description">
+                            Stok: <input type="text" class="form-control" name="stok">
+            
+                            Kategori:<select class="form-control" name="category">
+                                <% for (let i=0; i< categories.length; i++) { %>
+                                <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+                                <% } %>	
+                            </select>
+                           Ürün Fotoğrafı: <input type="file" name="image">
                            <input type="hidden" name="userID" class="form-control" value="<%= user.id %>">
                             <input type="submit" value="Gönder">
                           

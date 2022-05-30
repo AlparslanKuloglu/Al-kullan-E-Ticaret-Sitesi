@@ -1,14 +1,6 @@
 const Product = require('../models/product')
+const Category = require('../models/Category')
 const User = require('../models/User')
-const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
-const ejs = require('ejs')
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-
-
-
 const fileUpload = require('express-fileupload')
 const fs = require('fs')
 const path=require('path')
@@ -38,9 +30,9 @@ exports.getAllProducts = async (req, res) => {
 
     try {
     const products = await Product.find()
-
+    const categories= await Category.find()
         res.status(200).render('products',{
-            products
+            products,categories
         })
         
 

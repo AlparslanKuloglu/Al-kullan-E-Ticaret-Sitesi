@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Category = require('../models/Category')
 const Product= require('../models/product')
 const bcrypt=require('bcrypt')
 
@@ -51,5 +52,13 @@ exports.loginUser = async (req, res) => {
   exports.getSellerPage = async (req,res)=> {
     const products = await Product.find({userID:req.session.userID})
     const user= await User.findOne({_id:req.session.userID})
-    res.status(200).render('myProducts', {user,products} )
+    const categories=await Category.find()
+    res.status(200).render('myProducts', {user,products,categories} )
 } 
+
+exports.getMyBasketPage = async (req,res)=> {
+  const user= await User.findOne({_id:req.session.userID}).populate('basket')
+ 
+  res.status(200).render('myBasket', {user} )
+} 
+

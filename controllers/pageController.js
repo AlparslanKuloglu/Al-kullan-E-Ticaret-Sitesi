@@ -15,6 +15,3 @@ exports.getLoginPage =(req,res)=> {
 } 
 
 
-exports.getBasketPage =(req,res)=> {
-    res.status(200).render('myBasket' )
-} 

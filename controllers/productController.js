@@ -20,6 +20,8 @@ exports.createProduct = async (req, res) => {
       await Product.create({
         name: req.body.name,
         description: req.body.description,
+        stok: req.body.stok,
+        price: req.body.price,
         category: req.body.category,
         user: req.session.userID,
         image: '/uploads/' + uploadeImage.name,
@@ -120,3 +122,5 @@ exports.addToBasket = async (req, res) => {
       });
     }
   };
+
+

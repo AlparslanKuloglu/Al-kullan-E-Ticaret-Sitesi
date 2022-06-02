@@ -2,7 +2,7 @@ const Category = require('../models/Category');
 
 exports.createCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
+    const category = await Category.create(req.body)
 
    
   } catch (error) {
@@ -25,4 +25,4 @@ exports.deleteCategory = async (req, res) => {
       error,
     });
   }
-};
+}

@@ -16,7 +16,7 @@ router.route('/addToBasket').post(productontroller.addToBasket)
 router.route('/').post(productontroller.createProduct)
 router.route('/').get(productontroller.getAllProducts)
 router.route('/:slug').get(productontroller.getProduct);
-//router.route('/:slug').get()
+router.route('/:slug').delete(productontroller.deleteProduct);
 
 
 

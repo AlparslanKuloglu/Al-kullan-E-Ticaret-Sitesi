@@ -6,7 +6,6 @@ const bcrypt=require('bcrypt')
 const UserSchema = new Schema({
     name: {
         type: String,
-        unique: true,
         required: true
     },
     email: {

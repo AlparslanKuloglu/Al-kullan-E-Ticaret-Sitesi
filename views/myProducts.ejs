@@ -133,8 +133,26 @@
 								<h2><a href="/products/<%= products[i].slug %>" title="">	<%=products[i].name  %></a></h2>
 							</div>
 							<div class="blog-desc">
-								<p>"<%= products[i].description %></p>
+								<p><%= products[i].description %></p>
 							</div>
+                            <div class="clearfix">
+                                <ul style="list-style-type: none;">
+                                  <li style="float: left;">
+                                    <button class="btn btn-primary rounded-0 text-white" data-toggle="modal" data-target="#updateProduct<%= products[i]._id %>"><span>DÜZENLE</span></button>
+                                
+                                    <div class="modal fade" id="updateProduct<%= products[i]._id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                
+                                </li>
+    
+   
+   
+   
+                                  <li style="float: right;"><a href="/products/<%= products[i].slug %>?_method=DELETE"
+     
+                                    onclick="return confirm('ARE YOU SURE')"
+                                    class="btn btn-danger rounded-0 text-white"><span>SİL</span></a></li>
+                                </ul>
+                              </div>
 						</div>
 					</div>
                 </div><!-- end col -->	
@@ -222,13 +240,15 @@
 
                             Ürün Adı: <input type="text" class="form-control" name="name">
                             Ürün Özellikleri: <input type="text" class="form-control" name="description">
+                            Fiyat:<input type="text" class="form-control" name="price">
                             Stok: <input type="text" class="form-control" name="stok">
-            
-                            Kategori:<select class="form-control" name="category">
-                                <% for (let i=0; i< categories.length; i++) { %>
-                                <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
-                                <% } %>	
-                            </select>
+                            
+                               Kategori: <select class="form-control"  name="category">
+                                <% for (let i =0 ; i < categories.length; i++ ) { %> 
+                                  <option><%= categories[i].name %></option>
+                                  <% } %>
+                                </select>
+                         
                            Ürün Fotoğrafı: <input type="file" name="image">
                            <input type="hidden" name="userID" class="form-control" value="<%= user.id %>">
                             <input type="submit" value="Gönder">

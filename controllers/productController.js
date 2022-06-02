@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-const Category = require('../models/Category')
+const Category=require('../models/Category')
 const User = require('../models/User')
 const fileUpload = require('express-fileupload')
 const fs = require('fs')
@@ -19,7 +19,8 @@ exports.createProduct = async (req, res) => {
     uploadeImage.mv(uploadPath, async () => {
       await Product.create({
         name: req.body.name,
-        description: req.body.name,
+        description: req.body.description,
+        category: req.body.category,
         user: req.session.userID,
         image: '/uploads/' + uploadeImage.name,
       });
@@ -27,10 +28,21 @@ exports.createProduct = async (req, res) => {
     });
   };
 exports.getAllProducts = async (req, res) => {
-
+  
     try {
-    const products = await Product.find()
-    const categories= await Category.find()
+      const categorySlug = req.query.categories;
+      const category = await Category.findOne({slug:categorySlug})
+
+      let filter = {};
+
+      
+      if(categorySlug) {
+        filter = {category: category.name }
+      }
+     
+
+    const products = await Product.find(filter)
+    const categories = await Category.find()
         res.status(200).render('products',{
             products,categories
         })
@@ -83,6 +95,25 @@ exports.addToBasket = async (req, res) => {
     
     
     catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        error,
+      });
+    }
+  };
+
+
+
+
+  exports.deleteProduct = async (req, res) => {
+    try {    
+  
+      const product = await Product.findOneAndRemove({slug:req.params.slug})
+  
+  
+      res.status(200).redirect('/myProducts');
+  
+    } catch (error) {
       res.status(400).json({
         status: 'fail',
         error,

@@ -11,8 +11,13 @@ const ProductSchema = new Schema({
     },
     description: {
         type: String,
+        required: false 
+    },
+    price: {
+        type: String,
         required: false
     },
+
     stok: {
         type: String,
         required: false
@@ -21,8 +26,7 @@ const ProductSchema = new Schema({
         type: String
     },
     category: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Category'
+        type:String
     },
     slug: {
         type: String,

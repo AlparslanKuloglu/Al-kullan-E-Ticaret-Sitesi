@@ -104,6 +104,23 @@ exports.addToBasket = async (req, res) => {
     }
   };
 
+  exports.releaseProduct = async (req, res) => {
+    try {    
+      const user = await User.findById(req.session.userID);
+      await user.basket.pull({_id:req.body.product_id});
+      await user.save();
+  
+      res.status(200).redirect('/myBasket');
+    } catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        error,
+      });
+    }
+  };
+
+
+
 
 
 

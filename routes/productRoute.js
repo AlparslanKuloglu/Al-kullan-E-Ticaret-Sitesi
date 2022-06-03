@@ -18,6 +18,7 @@ router.route('/').get(productontroller.getAllProducts)
 router.route('/:slug').get(productontroller.getProduct);
 router.route('/:slug').delete(productontroller.deleteProduct);
 router.route('/release').post(productontroller.releaseProduct);
+router.route('/order').post(productontroller.Order)
 
 
 module.exports= router 

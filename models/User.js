@@ -17,9 +17,15 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
+    address: {
+        type: String,
+    },
     basket:[{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Product'
+      }],
+      orders:[{
+        type:mongoose.Schema.Types.ObjectId
       }],
     role:{
         type: String,

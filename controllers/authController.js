@@ -65,33 +65,7 @@ exports.getMyBasketPage = async (req, res) => {
 
 exports.getOrdersPage = async (req, res) => {
 
-  const user = await User.findOne({ _id: req.session.userID }).populate('orders')
+  const user = await User.findOne({ _id: req.session.userID }).populate('ordersDocument')
  
-  for (let i = 0; i < user.orders.length; i++) {
-    let product = await Product.findOne({ _id: user.orders[i] })
-
-    let customer = await User.findOne({_id: user.orders[i] })
-
-    
-    
-
-    if (customer) {
-      if(!(user.ordersDocument[i-1]===customer.name)) {
-      user.ordersDocument.push(customer.name,customer.email,customer.address,)
-     }
-    
-    }
-
-    if (product) {
-     user.ordersDocument.push(product.name)
-     
-    }
-  
-    user.save()
-
-  }
-  
-
-
   await res.status(200).render('myOrders', { user })
 } 

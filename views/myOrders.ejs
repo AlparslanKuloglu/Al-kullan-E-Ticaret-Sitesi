@@ -122,9 +122,18 @@
           </form>
         </div>
 
-        <% for (let i=0 ; i < user.orders.length/4; i++ ) { %>
+        <% for (let i=0 ; i < user.ordersDocument.length/4; i++ ) { %>
 
           <div class="col-lg-9 blog-post-single">
+            <div class="row">
+
+             
+              <div>
+              ------------------
+              </div>
+
+
+            </div><!-- end row -->
 
             <div class="row">
 
@@ -139,7 +148,7 @@
 
              
               <div>
-                Ürün: <%= user.ordersDocument[i+3] %>
+                Ürün: <%= user.ordersDocument[(i*4)+3] %>
               </div>
 
 
@@ -149,7 +158,7 @@
               
                 
                 <div>
-                  İsim: <%= user.ordersDocument[i] %>
+                  İsim: <%= user.ordersDocument[(i*4)] %>
                 </div>
 
               
@@ -158,7 +167,7 @@
 
              
               <div>
-                E-mail: <%= user.ordersDocument[i+1] %>
+                E-mail: <%= user.ordersDocument[(i*4)+1] %>
               </div>
 
 
@@ -167,7 +176,7 @@
 
              
               <div>
-                Adres: <%= user.ordersDocument[i+2] %>
+                Adres: <%= user.ordersDocument[(i*4)+2] %>
               </div>
 
 

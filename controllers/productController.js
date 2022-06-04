@@ -111,8 +111,9 @@ exports.Order = async (req, res) => {
   for (let i = 0; i < user.basket.length; i++) {
 
     let seller = await User.findOne({ _id: user.basket[i].user._id })
-    await seller.orders.push(user)
-    await seller.orders.push(user.basket[i])
+    console.log(seller.name)
+    await seller.ordersDocument.push(user.name,user.email,user.address)
+    await seller.ordersDocument.push(user.basket[i].name)
     await seller.save()
     await user.basket.pull(user.basket[i])
     user.save()

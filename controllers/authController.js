@@ -66,6 +66,22 @@ exports.getMyBasketPage = async (req, res) => {
 exports.getOrdersPage = async (req, res) => {
 
   const user = await User.findOne({ _id: req.session.userID }).populate('ordersDocument')
- 
+
   await res.status(200).render('myOrders', { user })
-} 
+}
+
+exports.deleteOrder = async (req, res) => {
+
+  const user = await User.findOne({ _id: req.session.userID }).populate('ordersDocument')
+
+
+  await user.ordersDocument.pull(user.ordersDocument[req.body.customerName])
+  await user.ordersDocument.pull(user.ordersDocument[req.body.customerEmail])
+  await user.ordersDocument.pull(user.ordersDocument[req.body.customerAddress])
+  await user.ordersDocument.pull(user.ordersDocument[req.body.productName])
+
+  await user.save()
+
+  await res.status(200).redirect('/')
+}
+

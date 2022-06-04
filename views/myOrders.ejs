@@ -182,7 +182,26 @@
 
             </div><!-- end row -->
 
+            <div class="col-lg-12 text-center ">
+              <form method="POST" action="/myOrders/deleteOrder">
+                <input type="hidden" name="customerName" value="<%=(i*4) %>" >
+                <input type="hidden" name="customerEmail" value="<%=(i*4) %>" >
+                <input type="hidden" name="customerAddress" value="<%=(i*4) %> ">
+                <input type="hidden" name="productName" value="<%=(i*4) %>" >
+               
+              
+                <button class="btn btn-lg btn-danger text-white"><span>Siparişi İptal Et</span></button>
+              </form> 
+              <form method="get" action="/myOrders">
+              <button class="btn btn-lg btn-warning rounded-0 text-white" href="#"
+                data-toggle="modal" data-target="#addProduct"><span>Kargoya Verildi
+                </span></button>
+              </form>
+         
+            </div> 
 
+          
+          
 
           </div><!-- end col -->
           <% } %>

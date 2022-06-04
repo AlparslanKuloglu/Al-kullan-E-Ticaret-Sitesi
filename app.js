@@ -13,6 +13,7 @@ const categoryRoute= require('./routes/categoryRoute')
 const productRoute = require('./routes/productRoute')
 const pageRoute= require('./routes/pageRoute')
 const userRoute= require('./routes/userRoute')
+const orderRoute = require('./routes/orderRoute')
 mongoose.connect('mongodb+srv://alparslank:12101210@cluster0.wfcgv.mongodb.net/test', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -56,7 +57,7 @@ app.use('/',pageRoute )
 app.use('/products',productRoute)
 app.use('/users',userRoute)
 app.use('/categories', categoryRoute);
-
+app.use('/myOrders', orderRoute );
 
 
 const port = 3000

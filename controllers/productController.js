@@ -117,6 +117,11 @@ exports.Order = async (req, res) => {
     await user.basket.pull(user.basket[i])
     user.save()
   }
+ 
+  
+  
+
+
 
   await res.status(200).redirect('/');
 

@@ -9,7 +9,7 @@ router.route('/register').get(pageController.getRegisterPage)
 router.route('/login').get(pageController.getLoginPage)
 router.route('/myProducts').get(authController.getSellerPage)
 router.route('/myBasket').get(authController.getMyBasketPage)
-
+router.route('/myOrders').get(authController.getOrdersPage)
 
 
 module.exports= router 

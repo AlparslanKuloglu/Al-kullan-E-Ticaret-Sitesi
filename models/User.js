@@ -27,6 +27,10 @@ const UserSchema = new Schema({
       orders:[{
         type:mongoose.Schema.Types.ObjectId
       }],
+      ordersDocument:[{
+          type: String
+        }
+      ],
     role:{
         type: String,
         enum:["Customer", "Seller", "Admin"],

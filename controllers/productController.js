@@ -106,25 +106,20 @@ exports.addToBasket = async (req, res) => {
 
 exports.Order = async (req, res) => {
 
-  let user = await User.findById(req.session.userID).populate('basket')
+  var user = await User.findById(req.session.userID).populate('basket')
 
-  for (let i = 0; i < user.basket.length; i++) {
-
-    let seller = await User.findOne({ _id: user.basket[i].user._id })
-    console.log(seller.name)
-    await seller.ordersDocument.push(user.name,user.email,user.address)
-    await seller.ordersDocument.push(user.basket[i].name)
+  for (let i = 0; i < user.basket.length; i) {
+    let seller = await User.findOne({ _id: user.basket[0].user._id })
+    await seller.ordersDocument.push(user.name, user.email, user.address)
+    await seller.ordersDocument.push(user.basket[0].name)
+    await user.basket.pull({ _id: user.basket[0]._id })
+    await user.save()
     await seller.save()
-    await user.basket.pull(user.basket[i])
-    user.save()
   }
- 
-  
-  
 
+  await console.log(user.basket.length)
+  await res.status(200).redirect('/myBasket');
 
-
-  await res.status(200).redirect('/');
 
 };
 

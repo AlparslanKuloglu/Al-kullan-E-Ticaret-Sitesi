@@ -50,7 +50,7 @@ exports.logoutUser = (req, res) => {
 }
 
 exports.getSellerPage = async (req, res) => {
-  const products = await Product.find({ userID: req.session.userID })
+  const products = await Product.find({ user: req.session.userID })
   const user = await User.findOne({ _id: req.session.userID })
   const categories = await Category.find()
 
@@ -82,6 +82,6 @@ exports.deleteOrder = async (req, res) => {
 
   await user.save()
 
-  await res.status(200).redirect('/')
+  await res.status(200).redirect('/myOrders')
 }
 
